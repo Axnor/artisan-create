@@ -1,5 +1,5 @@
 <?php
-namespace App\Repositories;
+namespace Repositories;
 
 use Validator;
 
@@ -17,7 +17,7 @@ abstract class AbstractEloquentRepository {
     /**
      * @var array
      */
-    protected $rules=array();
+    protected $rules = array();
 
     /**
      * Make a new instance of the entity to query on
@@ -29,6 +29,7 @@ abstract class AbstractEloquentRepository {
     {
         return $this->model->with($with);
     }
+
     /**
      * Return all entities
      *
@@ -38,6 +39,7 @@ abstract class AbstractEloquentRepository {
     {
         return $this->model->all();
     }
+
     /**
      * Find an entity by id
      *
@@ -47,15 +49,17 @@ abstract class AbstractEloquentRepository {
      */
     public function getById($id, array $with = array())
     {
-        if(!empty($with))
+        if ( ! empty($with))
         {
             $query = $this->make($with);
+
             return $query->find($id);
-        }
-        else {
+        } else
+        {
             return $this->model->find($id);
         }
     }
+
     /**
      * Find many entities by key value
      *
@@ -67,16 +71,15 @@ abstract class AbstractEloquentRepository {
      */
     public function getAllBy($key, $operand, $value, array $with = array())
     {
-        if(!empty($with))
+        if ( ! empty($with))
         {
             return $this->make($with)->where($key, $operand, $value)->get();
-        }
-        else
+        } else
         {
             return $this->model->where($key, $operand, $value)->get();
         }
-
     }
+
     /**
      * Find a single entity by key value
      *
@@ -88,16 +91,15 @@ abstract class AbstractEloquentRepository {
      */
     public function getFirstBy($key, $operand, $value, array $with = array())
     {
-        if(!empty($with))
+        if ( ! empty($with))
         {
             return $this->make($with)->where($key, $operand, $value)->first();
-        }
-        else
+        } else
         {
             return $this->model->where($key, $operand, $value)->first();
         }
-
     }
+
     /**
      * Get Results by Page
      *
@@ -108,17 +110,18 @@ abstract class AbstractEloquentRepository {
      */
     public function getByPage($page = 1, $limit = 10, array $with = array())
     {
-        $result             = new StdClass;
-        $result->page       = $page;
-        $result->limit      = $limit;
+        $result = new StdClass;
+        $result->page = $page;
+        $result->limit = $limit;
         $result->totalItems = 0;
-        $result->items      = array();
+        $result->items = array();
         $query = $this->make($with);
         $model = $query->skip($limit * ($page - 1))
             ->take($limit)
             ->get();
         $result->totalItems = $this->model->count();
-        $result->items      = $model->all();
+        $result->items = $model->all();
+
         return $result;
     }
 
@@ -148,11 +151,10 @@ abstract class AbstractEloquentRepository {
     {
         $object = $this->model->where($criteria)->get();
 
-        if($object->isEmpty())
+        if ($object->isEmpty())
         {
             return $this->create($input);
-        }
-        else
+        } else
         {
             return false;
         }
@@ -176,6 +178,7 @@ abstract class AbstractEloquentRepository {
     public function fillAndSave($input)
     {
         $this->fill($input);
+
         return $this->save();
     }
 
@@ -185,12 +188,11 @@ abstract class AbstractEloquentRepository {
      */
     public function validate($input)
     {
-        $validator = Validator::make($input, $this->rules);
-        if($validator->fails())
+        $validator = Validator::make($input, $this->model->rules);
+        if ($validator->fails())
         {
             return $validator->messages();
-        }
-        else
+        } else
         {
             return true;
         }
@@ -203,15 +205,14 @@ abstract class AbstractEloquentRepository {
     public function validateAndCreate($input)
     {
         $messages = $this->validate($input);
-        if($messages===true)
+        if ($messages === true)
         {
             $this->create($input);
+
             return true;
-        }
-        else{
+        } else
+        {
             return $messages;
         }
     }
-
-
 }

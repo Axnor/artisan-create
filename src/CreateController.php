@@ -93,6 +93,7 @@ class CreateController extends Command {
         return $code;
     }
 
+
     /**
      * Get the console command arguments.
      *

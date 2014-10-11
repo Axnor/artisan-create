@@ -1,5 +1,5 @@
 <?php
-namespace App\Repositories;
+namespace Repositories;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -10,6 +10,7 @@ class RepositoryServiceProvider extends ServiceProvider {
      */
     public function register()
     {
-        $this->app->bind('App\Repositories\User\UserRepository', 'App\Repositories\User\EloquentUserRepository');
+        $this->app->bind('Repositories\User\UserRepository', 'Repositories\User\EloquentUserRepository');
+        $this->app->bind('Repositories\Post\PostRepository', 'Repositories\Post\EloquentPostRepository');
     }
 }

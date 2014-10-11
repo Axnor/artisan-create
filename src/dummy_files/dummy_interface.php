@@ -1,7 +1,7 @@
 <?php
-namespace App\Repositories\D_U_M_M_Y_NAME;
+namespace Repositories\D_U_M_M_Y_NAME;
 
-interface D_U_M_M_Y_NAMERepository{
+interface D_U_M_M_Y_NAMERepository {
 
     /**
      * Return all entities
