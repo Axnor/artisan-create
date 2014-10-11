@@ -9,31 +9,15 @@ class ArtisanCreateServiceProvider extends ServiceProvider {
     {
 
         // Register create:model
-        $this->registerCreateModel();
-        $this->commands('CreateModel');
-
-        // Register create:controller
-        $this->registerCreateController();
-        $this->commands('CreateController');
-
+        $this->registerCreateRepository();
+        $this->commands('CreateRepository');
     }
 
-    private function registerCreateModel()
+    private function registerCreateRepository()
     {
-        $this->app['CreateModel'] = $this->app->share(function($app)
+        $this->app['CreateRepository'] = $this->app->share(function ($app)
         {
-            return new CreateModel();
+            return new CreateRepository();
         });
     }
-
-    private function registerCreateController()
-    {
-        $this->app['CreateController'] = $this->app->share(function($app)
-        {
-            return new CreateController();
-        });
-    }
-
-
-
 }

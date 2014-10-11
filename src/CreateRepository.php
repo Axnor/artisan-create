@@ -5,7 +5,7 @@ use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 
-class CreateModel extends Command {
+class CreateRepository extends Command {
 
 	/**
 	 * The console command name.
@@ -47,7 +47,7 @@ class CreateModel extends Command {
         $this->info(" " );
 
         // Create Model
-        $model = $fileObject->createModel();
+        $model = $fileObject->CreateModel();
         if($model)
         {
             $this->info("  ... Model '".ucfirst($modelName).".php ' created" );
