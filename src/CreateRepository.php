@@ -12,7 +12,7 @@ class CreateRepository extends Command {
 	 *
 	 * @var string
 	 */
-	protected $name = 'create:model';
+	protected $name = 'create:repository';
 
 	/**
 	 * The console command description.
@@ -38,7 +38,7 @@ class CreateRepository extends Command {
 	 */
 	public function fire()
 	{
-        $modelName = $this->argument('model_name');
+        $modelName = $this->argument('repository_name');
         $modelName = is_null($modelName) ?  $this->ask("Type in the name of the model you want to create: ") : $modelName;
         $fileObject = new GenerateRepositoryFiles($modelName);
 
@@ -97,7 +97,7 @@ class CreateRepository extends Command {
 	protected function getArguments()
 	{
 		return array(
-			array('model_name', InputArgument::OPTIONAL, 'Name of the Model.'),
+			array('repository_name', InputArgument::OPTIONAL, 'Name of the Repository.'),
 		);
 	}
 
@@ -109,7 +109,7 @@ class CreateRepository extends Command {
 	protected function getOptions()
 	{
 		return array(
-			array('migrate', null, InputOption::VALUE_OPTIONAL, 'Run artisan migrate for this Model.', null),
+
 		);
 	}
 
