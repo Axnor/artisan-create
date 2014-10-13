@@ -181,38 +181,4 @@ abstract class AbstractEloquentRepository {
 
         return $this->save();
     }
-
-    /**
-     * @param array $input
-     * @return bool
-     */
-    public function validate($input)
-    {
-        $validator = Validator::make($input, $this->model->rules);
-        if ($validator->fails())
-        {
-            return $validator->messages();
-        } else
-        {
-            return true;
-        }
-    }
-
-    /**
-     * @param $input
-     * @return bool|array
-     */
-    public function validateAndCreate($input)
-    {
-        $messages = $this->validate($input);
-        if ($messages === true)
-        {
-            $this->create($input);
-
-            return true;
-        } else
-        {
-            return $messages;
-        }
-    }
 }
