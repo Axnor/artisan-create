@@ -78,16 +78,4 @@ interface D_U_M_M_Y_NAMERepository {
      * @return $this
      */
     public function fillAndSave($input);
-
-    /**
-     * @param array $input
-     * @return bool
-     */
-    public function validate($input);
-
-    /**
-     * @param $input
-     * @return $this|bool
-     */
-    public function validateAndCreate($input);
 }

@@ -50,33 +50,33 @@ class CreateRepository extends Command {
         $model = $fileObject->CreateModel();
         if($model)
         {
-            $this->info("  ... Model '".ucfirst($modelName).".php ' created" );
+            $this->info("  ... Model '".ucfirst($modelName).".php' created" );
         }
         else
         {
-            $this->error("  ... Model ' ". ucfirst($modelName) . ".php ' already exists");
+            $this->error("  ... Model '". ucfirst($modelName) . ".php' already exists");
         }
 
         // Create Repository Interface
         $interface = $fileObject->createRepositoryInterface();
         if($interface)
         {
-            $this->info("  ... Repository Interface '".ucfirst($modelName)."Repository.php ' created" );
+            $this->info("  ... Repository Interface '".ucfirst($modelName)."Repository.php' created" );
         }
         else
         {
-            $this->error("  ... Repository Interface ' ". ucfirst($modelName) . "Repository.php ' already exists");
+            $this->error("  ... Repository Interface '". ucfirst($modelName) . "Repository.php' already exists");
         }
 
         // Create Eloquent Query Object
         $eloquentQueryObject = $fileObject->createEloquentQueryObject();
-        if($interface)
+        if($eloquentQueryObject)
         {
-            $this->info("  ... Eloquent Query File 'Eloquent".ucfirst($modelName)."Repository.php ' created" );
+            $this->info("  ... Eloquent Query File 'Eloquent".ucfirst($modelName)."Repository.php' created" );
         }
         else
         {
-            $this->error("  ... Eloquent Query File ' Eloquent". ucfirst($modelName) . "Repository.php ' already exists");
+            $this->error("  ... Eloquent Query File 'Eloquent". ucfirst($modelName) . "Repository.php' already exists");
         }
 
         // Output Success Info
