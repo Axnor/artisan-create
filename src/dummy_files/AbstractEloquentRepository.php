@@ -156,7 +156,7 @@ abstract class AbstractEloquentRepository {
             return $this->create($input);
         } else
         {
-            return false;
+            return null;
         }
     }
 
